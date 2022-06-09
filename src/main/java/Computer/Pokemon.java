@@ -911,13 +911,13 @@ public final class Pokemon extends Computer {
     };
 
 
-    public Pokemon(String name, String gender, String[] type, int health, int attack, int specialAttack, int defence, int specialDefence, int initiative) {
-        super(name, gender);
+    public Pokemon(String name, String[] type, long health, long attack, long specialAttack, long defence, long specialDefence, long speed) {
+        super(name);
         this.currentLevel = 1;
         this.currentXP = 0;
         this.XP_to_next_Level = getXP_for_next_Level(currentLevel);
         this.type = type;
-        this.stats = new Stats(health,attack,specialAttack,defence,specialDefence,initiative);
+        this.stats = new Stats(health,attack,specialAttack,defence,specialDefence,speed);
     }
 
     private int getXP_for_next_Level(int currentLevel){

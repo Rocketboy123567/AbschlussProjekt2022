@@ -4,4 +4,5 @@ public class Attacks {
     int basePower;
     String type;
     String attackType;
+    String name;
 }

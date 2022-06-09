@@ -21,7 +21,7 @@ public final class GameFrame extends JFrame {
     Container contentPane = this.getContentPane();
     JFrame frame = this;
     JPanel attackPanel = new JPanel();
-    Player player = new Player("Test","Test");
+    Player player = new Player("Steve");
     ArrayList<Pokemon> pokeList = new ArrayList<>();
 
     public GameFrame() {
@@ -96,11 +96,13 @@ public final class GameFrame extends JFrame {
 
     private void customGame() {
 
-        NPC enemy = new NPC("Test_Enemy","Test",false);
+        NPC enemy = new NPC("Nügy",false);
 
         removeComponents();
         player.choosePokemon(contentPane);
         reloadFrame();
+
+
 
 //        removeComponents();
 //        enemy.choosePokemon(contentPane);
