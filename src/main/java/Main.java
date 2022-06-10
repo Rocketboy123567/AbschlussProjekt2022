@@ -1,8 +1,9 @@
 import GameFrame.*;
 
 public class Main {
+    public static GameFrame frame;
     public static void main(String[] args) {
-        GameFrame frame = new GameFrame();
+        frame = new GameFrame();
 
     }
 }

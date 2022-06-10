@@ -18,10 +18,12 @@ import static Computer.JSON.getJSON.getJSONObject;
 public final class GameFrame extends JFrame {
     static int width = 1280;
     static int height = 720;
+    public static boolean picked;
     Container contentPane = this.getContentPane();
     JFrame frame = this;
     JPanel attackPanel = new JPanel();
     Player player = new Player("Steve");
+    public NPC enemy = new NPC("Nügy",false);
     ArrayList<Pokemon> pokeList = new ArrayList<>();
 
     public GameFrame() {
@@ -96,17 +98,27 @@ public final class GameFrame extends JFrame {
 
     private void customGame() {
 
-        NPC enemy = new NPC("Nügy",false);
+
 
         removeComponents();
         player.choosePokemon(contentPane);
         reloadFrame();
 
 
+        while(!picked){
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
-//        removeComponents();
-//        enemy.choosePokemon(contentPane);
-//        reloadFrame();
+
+        removeComponents();
+        enemy.choosePokemon(contentPane);
+        reloadFrame();
+
+
 //
 //        initAttackPanel();
     }

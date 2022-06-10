@@ -1,5 +1,7 @@
 package Computer;
 
+import GameFrame.GameFrame;
+import com.sun.tools.javac.Main;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -18,6 +20,7 @@ import static Computer.JSON.getJSON.getJSONObject;
 public abstract class Computer {
     String name;
     Pokemon pokemon;
+    static int counter = 0;
 
     public Computer(String name) {
         this.name = name;
@@ -75,7 +78,7 @@ public abstract class Computer {
         JSONObject[][] pokemon = new JSONObject[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                int randomNumb = rand.nextInt(0,930);/*898+32*/
+                int randomNumb = rand.nextInt(1,930);/*898+32*/
                 if(randomNumb>898){
                     randomNumb = (randomNumb-898)+10000;
                 }
@@ -83,7 +86,6 @@ public abstract class Computer {
                 pokemon[i][j] = getJSONObject("https://pokeapi.co/api/v2/pokemon/" + randomNumb);
             }
         }
-
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -108,6 +110,8 @@ public abstract class Computer {
                         public void actionPerformed(ActionEvent e) {
                             setPokemon(poke);
                             displayPoke();
+                            GameFrame.picked = true;
+                            if(counter==0);
                         }
                     });
                     contentpane.add(pokebutton);
@@ -117,7 +121,6 @@ public abstract class Computer {
 //                J
             }
         }
-
 
     }
 }
