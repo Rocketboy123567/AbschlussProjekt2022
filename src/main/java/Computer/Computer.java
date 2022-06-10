@@ -20,7 +20,6 @@ import static Computer.JSON.getJSON.getJSONObject;
 public abstract class Computer {
     String name;
     Pokemon pokemon;
-    static int counter = 0;
 
     public Computer(String name) {
         this.name = name;
@@ -111,14 +110,13 @@ public abstract class Computer {
                             setPokemon(poke);
                             displayPoke();
                             GameFrame.picked = true;
-                            if(counter==0);
                         }
                     });
                     contentpane.add(pokebutton);
                 } catch(IOException ie){
                     ie.printStackTrace();
                 }
-//                J
+//
             }
         }
 
