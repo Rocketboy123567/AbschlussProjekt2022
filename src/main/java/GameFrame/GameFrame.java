@@ -22,8 +22,8 @@ public final class GameFrame extends JFrame {
     Container contentPane = this.getContentPane();
     JFrame frame = this;
     JPanel attackPanel = new JPanel();
-    Player player = new Player("Steve");
-    public NPC enemy = new NPC("Nügy",false);
+    static Player player = new Player("Steve");
+    static public NPC enemy = new NPC("Nügy",false);
     ArrayList<Pokemon> pokeList = new ArrayList<>();
 
     public GameFrame() {
@@ -67,7 +67,11 @@ public final class GameFrame extends JFrame {
 
                 customGame();
 
+
+
                 reloadFrame();
+
+
             }
         });
 
@@ -101,11 +105,10 @@ public final class GameFrame extends JFrame {
 
 
         removeComponents();
-        player.choosePokemon(contentPane);
+        player.choosePokemon(contentPane, enemy);
         reloadFrame();
 
-
-        while(!picked){
+        /*while(!picked){
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -116,8 +119,7 @@ public final class GameFrame extends JFrame {
 
         removeComponents();
         enemy.choosePokemon(contentPane);
-        reloadFrame();
-
+        reloadFrame();*/
 
 //
 //        initAttackPanel();
@@ -160,9 +162,17 @@ public final class GameFrame extends JFrame {
         frame.repaint();
     }
 
+    public static void dontinue(){
+        player.displayPoke();
+        enemy.displayPoke();
+    }
+
 
 //    private void initPokemon(){
 //        //TODO
 //    }
+
+
+
 }
 

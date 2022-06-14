@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
 
+
 import static Computer.JSON.getJSON.getJSONObject;
 
 public abstract class Computer {
@@ -69,7 +70,7 @@ public abstract class Computer {
         this.pokemon = new Pokemon(name,type,(long) health.get("base_stat"),(long) attack.get("base_stat"),(long) specialAttack.get("base_stat"),(long) defence.get("base_stat"),(long) specialDefence.get("base_stat"),(long) speed.get("base_stat"));
     }
 
-    public void choosePokemon(Container contentpane)  {
+    public void choosePokemon(Container contentpane, NPC enemy)  {
 
         Random rand = new Random();
 
@@ -108,8 +109,16 @@ public abstract class Computer {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             setPokemon(poke);
-                            displayPoke();
-                            GameFrame.picked = true;
+                            if(GameFrame.picked==false){
+                                GameFrame.picked = true;
+                                contentpane.removeAll();
+                                enemy.choosePokemon(contentpane,enemy);
+                                contentpane.revalidate();
+                                contentpane.repaint();
+                            }
+                            else{
+                                GameFrame.dontinue();
+                            }
                         }
                     });
                     contentpane.add(pokebutton);
@@ -121,4 +130,5 @@ public abstract class Computer {
         }
 
     }
+
 }
