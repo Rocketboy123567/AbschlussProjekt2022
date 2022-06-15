@@ -36,7 +36,7 @@ public abstract class Computer {
         System.out.println("Defence: "+this.pokemon.stats.defence);
         System.out.println("SpecialDefence: "+this.pokemon.stats.specialDefence);
         System.out.println("Speed: "+this.pokemon.stats.speed);
-        System.out.println();
+        System.out.println("Attacke 1:");
         System.out.println("Attacke 1: "+this.pokemon.attacks[0].name);
         System.out.println("Typ: "+this.pokemon.attacks[0].type);
         System.out.println("Stärke: "+this.pokemon.attacks[0].basePower);
@@ -110,14 +110,27 @@ public abstract class Computer {
             if(q.contains(test))
             {
 
-                long accuracy = (long) move.get("accuracy");
-                JSONObject dc = (JSONObject) move.get("damage_class");
-                String attacktype = (String) dc.get("name");
-                String nm = (String) move.get("name");
-                System.out.println(nm);
-                long power = (long) move.get("power");
-                long pp = (long) move.get("pp");
-                z[i]= new Attacks(accuracy, power, null, attacktype, nm, pp);
+                if(move.get("accuracy")==null){
+                    i--;
+                }
+                else{
+                    long accuracy = (long) move.get("accuracy");
+                    JSONObject dc = (JSONObject) move.get("damage_class");
+                    String attacktype = (String) dc.get("name");
+                    String nm = (String) move.get("name");
+                    System.out.println(nm);
+                    JSONObject mtype = (JSONObject) move.get("type");
+                    String smtype = (String) mtype.get("name");
+                    if(move.get("power")==null){
+                        i--;
+                    }
+                    else{
+                        long power = (long) move.get("power");
+                        long pp = (long) move.get("pp");
+                        z[i]= new Attacks(accuracy, power, smtype, attacktype, nm, pp);
+                    }
+                }
+
             }
             else{
                 i--;
@@ -126,7 +139,7 @@ public abstract class Computer {
                 System.out.println(i);
             }
         }
-        this.pokemon = new Pokemon(name,type,(long) health.get("base_stat"),(long) attack.get("base_stat"),(long) specialAttack.get("base_stat"),(long) defence.get("base_stat"),(long) specialDefence.get("base_stat"),(long) speed.get("base_stat"));
+        this.pokemon = new Pokemon(name,type,(long) health.get("base_stat"),(long) attack.get("base_stat"),(long) specialAttack.get("base_stat"),(long) defence.get("base_stat"),(long) specialDefence.get("base_stat"),(long) speed.get("base_stat"),z);
     }
 
     public void choosePokemon(Container contentpane, NPC enemy)  {
