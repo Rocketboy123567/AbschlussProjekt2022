@@ -135,8 +135,6 @@ public abstract class Computer {
             else{
                 i--;
                 System.out.println(test);
-                System.out.println(q);
-                System.out.println(i);
             }
         }
         this.pokemon = new Pokemon(name,type,(long) health.get("base_stat"),(long) attack.get("base_stat"),(long) specialAttack.get("base_stat"),(long) defence.get("base_stat"),(long) specialDefence.get("base_stat"),(long) speed.get("base_stat"),z);
