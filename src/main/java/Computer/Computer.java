@@ -36,7 +36,7 @@ public abstract class Computer {
         System.out.println("Defence: "+this.pokemon.stats.defence);
         System.out.println("SpecialDefence: "+this.pokemon.stats.specialDefence);
         System.out.println("Speed: "+this.pokemon.stats.speed);
-        System.out.println("Attacke 1:");
+        System.out.println("");
         System.out.println("Attacke 1: "+this.pokemon.attacks[0].name);
         System.out.println("Typ: "+this.pokemon.attacks[0].type);
         System.out.println("Stärke: "+this.pokemon.attacks[0].basePower);
