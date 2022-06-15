@@ -36,9 +36,35 @@ public abstract class Computer {
         System.out.println("Defence: "+this.pokemon.stats.defence);
         System.out.println("SpecialDefence: "+this.pokemon.stats.specialDefence);
         System.out.println("Speed: "+this.pokemon.stats.speed);
+        System.out.println();
+        System.out.println("Attacke 1: "+this.pokemon.attacks[0].name);
+        System.out.println("Typ: "+this.pokemon.attacks[0].type);
+        System.out.println("Stärke: "+this.pokemon.attacks[0].basePower);
+        System.out.println("Art: "+this.pokemon.attacks[0].attackType);
+        System.out.println("PP: "+this.pokemon.attacks[0].pp);
+        System.out.println();
+        System.out.println("Attacke 2: "+this.pokemon.attacks[1].name);
+        System.out.println("Typ: "+this.pokemon.attacks[1].type);
+        System.out.println("Stärke: "+this.pokemon.attacks[1].basePower);
+        System.out.println("Art: "+this.pokemon.attacks[1].attackType);
+        System.out.println("PP: "+this.pokemon.attacks[1].pp);
+        System.out.println();
+        System.out.println("Attacke 3: "+this.pokemon.attacks[2].name);
+        System.out.println("Typ: "+this.pokemon.attacks[2].type);
+        System.out.println("Stärke: "+this.pokemon.attacks[2].basePower);
+        System.out.println("Art: "+this.pokemon.attacks[2].attackType);
+        System.out.println("PP: "+this.pokemon.attacks[2].pp);
+        System.out.println();
+        System.out.println("Attacke 4: "+this.pokemon.attacks[3].name);
+        System.out.println("Typ: "+this.pokemon.attacks[3].type);
+        System.out.println("Stärke: "+this.pokemon.attacks[3].basePower);
+        System.out.println("Art: "+this.pokemon.attacks[3].attackType);
+        System.out.println("PP: "+this.pokemon.attacks[3].pp);
     }
 
     public void setPokemon(JSONObject pokemon) {
+
+        Random rand = new Random();
         JSONObject species = (JSONObject) pokemon.get("species");
         String name = (String) species.get("name");
 
@@ -67,6 +93,39 @@ public abstract class Computer {
 
         JSONObject speed= (JSONObject) stats.get(5);
 
+        JSONArray moves = (JSONArray)  pokemon.get("moves");
+
+
+        Attacks[] z = new Attacks[4];
+        for (int i = 0; i < 4; i++) {
+            int randatt = rand.nextInt(1,moves.size());
+            JSONObject move = (JSONObject) moves.get(randatt);
+            move = (JSONObject) move.get("move");
+            String url = (String) move.get("url");
+            move = getJSONObject(url);
+            JSONObject meta = (JSONObject) move.get("meta");
+            JSONObject category = (JSONObject) meta.get("category");
+            String test = (String) category.get("name");
+            String q = "damage";
+            if(q.contains(test))
+            {
+
+                long accuracy = (long) move.get("accuracy");
+                JSONObject dc = (JSONObject) move.get("damage_class");
+                String attacktype = (String) dc.get("name");
+                String nm = (String) move.get("name");
+                System.out.println(nm);
+                long power = (long) move.get("power");
+                long pp = (long) move.get("pp");
+                z[i]= new Attacks(accuracy, power, null, attacktype, nm, pp);
+            }
+            else{
+                i--;
+                System.out.println(test);
+                System.out.println(q);
+                System.out.println(i);
+            }
+        }
         this.pokemon = new Pokemon(name,type,(long) health.get("base_stat"),(long) attack.get("base_stat"),(long) specialAttack.get("base_stat"),(long) defence.get("base_stat"),(long) specialDefence.get("base_stat"),(long) speed.get("base_stat"));
     }
 
